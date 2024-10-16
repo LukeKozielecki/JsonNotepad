@@ -1,0 +1,40 @@
+{
+  "notesResponse": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "title": "Gnomes problem",
+      "content": "Recently, the local gnomes have become quite unruly, even going so far as to 'borrow' tools and materials from residents for their tinkering projects. A local fisherman remarked, 'Aye, it’s not an issue when they’re off on their wee adventures, but the last time I returned to the loch, they had it rigged up to some dodgy, makeshift, nuclear reactor! Bloody hell. I had no idea what to do about it, but my auld lass declared that this was well past the point where she would draw the line!'\n\nAnother fellow, a resident from down the way, chimed in, 'Och, it’s a right mess, I tell ye! Last week, I caught them tryin’ to nick one o’ ma sheep for some powered contraption o’ their. It’s nae a bloody joke! These sheep are ma livelihood. If they think they can keep messin’ wi’ them, intae their wee experiments, they’ll find themselves on the wrang end o’ ma shillelagh! I love a guid laugh, but there’s a limit, I say!'",
+      "createdAt": 1633046400000,
+      "updatedAt": 1633046405000,
+      "tags": [
+        "meeting",
+        "project"
+      ],
+      "category": "Work",
+      "priority": "HIGH",
+      "noteStatus": "DRAFT",
+      "attachments": [],
+      "sharedWith": [],
+      "lastModifiedBy": "Luke",
+      "reminderAt": 1633132800000
+    },
+    {
+      "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "title": "Don’t Feed the Gnomes",
+      "content": "Well, I tell ya, you’d think that feedin’ the gnomes would be a harmless idea, right? Maybe even a kinda sweet thing to do! WRONG! Good grief! These tiny little gremlins seem to pop up all over the place, at any time, and all. at. once! First, they went ‘n fixed my sink. Sounded great, huh? But then, can you believe it, they hooked the pipes up to the balcony… OF MY NEIGHBOR! And don’t even get me started on the mess! My water bill is sky-high, and I’m scratchin’ my head wonderin’ how in the world I’m gonna make ends meet this month!\n\nI’m feelin’ dizzy every time I step outside. Last time I forgot my office ID card, and when I came back, those little rascals were in the middle of makin’ a swing outta my livin’ room sofa! They just looked at me, then at my sofa, and then zipped off like it was as normal as can be.\n\nGood folks, please, give me a hand! I could sure use some help! I don’t know what to do, and I definitely don’t want to be harborin’ these pesky gnomes anymore. Let’s band together, and take back my home before they decide to pack up & move to YOUR place! And remember: DO NOT. FEED. the gnomes!",
+      "createdAt": 1633050000000,
+      "updatedAt": null,
+      "tags": [
+        "gnomes",
+        "community-service"
+      ],
+      "category": "Communal",
+      "priority": "HIGH",
+      "noteStatus": "IN_PROGRESS",
+      "attachments": [],
+      "sharedWith": [],
+      "lastModifiedBy": null,
+      "reminderAt": 1633132800000
+    }
+  ]
+}

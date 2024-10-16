@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Notepad</string>
+    <string name="mock_note1_title">Gnomes problem</string>
+    <string name="mock_note1_content">The local gnomes have recently got more rowdy than ever. They even started using people\'s tools and materials for their tinkering. A local fisherman remarked, Aye, it’s nae an issue when they’re off on their wee adventures, but the last time I returned to the loch, they had it rigged up to some dodgy makeshift nuclear reactor! Bloody hell. I had nae idea what to do about it, but my auld lass declared that this was well past the point where she draw the line!</string>
+</resources>
