@@ -10,6 +10,7 @@ import luke.koz.notepad.notes_inspect.presentation.NotesInspectScreen
 import luke.koz.notepad.notes_inspect.presentation.NotesInspectScreenRoute
 import luke.koz.notepad.notes_list.presentation.NotesScreen
 import luke.koz.notepad.notes_list.presentation.NotesScreenRoute
+import luke.koz.notepad.notes_modify.presentation.NotesInsertEditScreen
 import luke.koz.notepad.notes_modify.presentation.NotesInsertEditScreenRoute
 
 @Composable
@@ -20,15 +21,25 @@ fun ApplicationNavHost(modifier: Modifier = Modifier) {
         startDestination = NotesScreenRoute
     ) {
         composable<NotesScreenRoute> {
-            NotesScreen(navController = navController)
+            NotesScreen(
+                modifier = modifier,
+                navController = navController
+            )
         }
         composable<NotesInspectScreenRoute> {
             val args = it.toRoute<NotesInspectScreenRoute>()
-            NotesInspectScreen(modifier = modifier, uuidAsString = args.uuidAsString)
+            NotesInspectScreen(
+                modifier = modifier,
+                uuidAsString = args.uuidAsString,
+                navHostController = navController
+            )
         }
         composable<NotesInsertEditScreenRoute> {
             val args = it.toRoute<NotesInsertEditScreenRoute>()
-
+            NotesInsertEditScreen(
+                uuidAsString = args.uuidAsString,
+                navHostController = navController
+            )
         }
     }
 }

@@ -4,7 +4,7 @@ package luke.koz.notepad.notes_list.model
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
-@Serializable data class NotesListResponse(val notesResponse : List<NotesDataClass>)
+@Serializable data class NotesListResponse(@Serializable val notesResponse : List<NotesDataClass>)
 
 @Serializable
 data class NotesDataClass(
@@ -14,7 +14,7 @@ data class NotesDataClass(
     val content: String,
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long? = null,
-    val tags: List<String> = emptyList(),
+    val tags: MutableList<String> = mutableListOf(),
     val category: String? = null,
     val priority: Priority = Priority.MEDIUM,
     val noteStatus: NoteStatus = NoteStatus.DRAFT,

@@ -63,7 +63,7 @@ private fun NotesSingleNotePreview() {
     val mockNote = NotesDataClass(
         title = stringResource(R.string.mock_note1_title),
         content = stringResource(R.string.mock_note1_content),
-        tags = listOf("meeting", "project"),
+        tags = mutableListOf("meeting", "project"),
         category = "Work",
         priority = Priority.HIGH,
         noteStatus = NoteStatus.DRAFT,

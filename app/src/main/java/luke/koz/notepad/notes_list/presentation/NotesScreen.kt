@@ -26,6 +26,7 @@ import kotlinx.serialization.Serializable
 import luke.koz.notepad.notes_inspect.presentation.NotesInspectScreenRoute
 import luke.koz.notepad.notes_list.domain.NotesViewModel
 import luke.koz.notepad.notes_list.model.NotesDataClass
+import luke.koz.notepad.notes_modify.presentation.NotesInsertEditScreenRoute
 import luke.koz.notepad.utils.presentation.ScaffoldTopAppBar
 
 @Serializable object NotesScreenRoute
@@ -45,7 +46,7 @@ fun NotesScreen(modifier: Modifier = Modifier, navController: NavHostController)
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-//                    navController.navigate()
+                    navController.navigate(NotesInsertEditScreenRoute(uuidAsString = ""))
                 }
             ) {
                 Icon(
