@@ -8,14 +8,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.serialization.Serializable
-import luke.koz.notepad.notes_list.domain.NotesViewModel
-import luke.koz.notepad.notes_list.model.NotesDataClass
 import luke.koz.notepad.notes_list.presentation.NotesSingleNote
+import luke.koz.notepad.notes_modify.domain.NoteInputEditViewModel
 import luke.koz.notepad.ui.theme.NotepadTheme
 import luke.koz.notepad.utils.presentation.ScaffoldTopAppBar
 import java.util.UUID
@@ -42,29 +44,37 @@ fun NotesInspectScreen(modifier: Modifier = Modifier, uuidAsString: String) {
         }
     ) { innerPadding ->
         // todo this needs it's own view model
-        // todo && that means move loadNotes to interface
-        val tempViewModel = NotesViewModel()
+        // completed move loadNotes to interface
+        val noteInputEditViewModel = NoteInputEditViewModel()
         val context = LocalContext.current
-        val listOfNotes = tempViewModel.loadNotes(context,"notes.json").notesResponse.filter { it.id == UUID.fromString(uuidAsString) }
-        var matchedNote : NotesDataClass = tempViewModel.loadNotes(context,"notes.json").notesResponse[0]
-        if (listOfNotes.isNotEmpty()) {
-            // Technically this implementation means there could be many with same id
-            matchedNote = listOfNotes.first() // if we get more than one than take first, because this is +-ad hoc
-        } else {
-            // because this is ad hoc
-            Column (Modifier.padding(innerPadding)) {
-                Text("Because this is ad hoc")
-                Text("The passed string was $uuidAsString")
-            }
+        val uuid = UUID.fromString(uuidAsString)
+        noteInputEditViewModel.loadNotes(context, "notes.json")
+
+        LaunchedEffect(Unit) {
+            noteInputEditViewModel.loadNotes(context, "notes.json") // Make sure this function is defined as loadData in the ViewModel
         }
-        Box (modifier = Modifier.padding(innerPadding)) {
-            Box (modifier = Modifier.padding(bottom = 8.dp, start = 8.dp, end = 8.dp)) {
-                NotesSingleNote(
-                    modifier.fillMaxWidth(),
-                    note = matchedNote,
-                    truncateNoteBoolean = false,
-                    onClick = {}
-                )
+        val notesListResponse by noteInputEditViewModel.notes.observeAsState()
+        notesListResponse?.let { response ->
+            val listOfNotes = response.notesResponse.filter { it.id == uuid }
+            val matchedNote = if (listOfNotes.isNotEmpty()) listOfNotes.first() else null
+
+            if (matchedNote != null) {
+                Box(modifier = Modifier.padding(innerPadding)) {
+                    Box(modifier = Modifier.padding(bottom = 8.dp, start = 8.dp, end = 8.dp)) {
+                        NotesSingleNote(
+                            modifier = Modifier.fillMaxWidth(),
+                            note = matchedNote,
+                            truncateNoteBoolean = false,
+                            onClick = null
+                        )
+                    }
+                }
+            } else {
+                // Handle case when no note is matched
+                Column(modifier = Modifier.padding(innerPadding)) {
+                    Text("Because this is ad hoc")
+                    Text("The passed string was $uuidAsString")
+                }
             }
         }
     }

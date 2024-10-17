@@ -24,7 +24,7 @@ fun NotesSingleNote(
     modifier: Modifier = Modifier,
     note: NotesDataClass,
     truncateNoteBoolean : Boolean = true,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)?,
 ) {
     val notesViewModel: NotesViewModel = viewModel()
     // TODO these should be passed by reference but this is future me problem
@@ -32,12 +32,17 @@ fun NotesSingleNote(
     val truncatedNoteContent by notesViewModel
         .truncateNoteContent(note)
         .collectAsState("")
-//    val onCardClick : (NavController) -> Unit
     Card(
         modifier = modifier
             .padding(8.dp)
             .fillMaxWidth()
-            .clickable { onClick() }
+            .let {
+                if (onClick != null) {
+                    it.clickable { onClick() }
+                } else {
+                    it
+                }
+            }
     ) {
         NotesSingleNoteContent(
             modifier = modifier,
