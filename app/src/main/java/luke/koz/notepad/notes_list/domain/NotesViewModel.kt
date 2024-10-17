@@ -1,36 +1,25 @@
 package luke.koz.notepad.notes_list.domain
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.serialization.json.Json
 import luke.koz.notepad.notes_list.model.NotesDataClass
 import luke.koz.notepad.notes_list.model.NotesListResponse
+import luke.koz.notepad.utils.domain.DefaultNotesLoader
+import luke.koz.notepad.utils.domain.NotesLoader
 
-class NotesViewModel () : ViewModel () {
+class NotesViewModel : ViewModel () {
 
+    private val _notesLoader: NotesLoader = DefaultNotesLoader()
     private val _contentMaxLength : Int = 100
     private val _noteContent  = MutableStateFlow<String?>(null)
 
-/*
-    val displayedContent: StateFlow<String> = _noteContent
-        .map { content ->
-            content?.let {
-                if (it.length > _contentMaxLength) {
-                    it.take(_contentMaxLength) + "..."
-                } else {
-                    it
-                }
-            } ?: ""
-        }
-        .stateIn(viewModelScope, SharingStarted.Lazily, "")
-*/
+    private val _notes = MutableLiveData<NotesListResponse>()
+    val notes: LiveData<NotesListResponse> get() = _notes
 
     /**
      * Function to truncate note to length size of given int.
@@ -52,9 +41,9 @@ class NotesViewModel () : ViewModel () {
         _noteContent.value = updatedContent
     }
 
-    fun loadNotes(context: Context, fileName: String): NotesListResponse {
-        val jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
-        return Json.decodeFromString(jsonString)
+    fun loadNotes(context: Context, fileName: String) {
+        val notesListResponse = _notesLoader.loadNotes(context, fileName)
+        _notes.value = notesListResponse
     }
 
 }
